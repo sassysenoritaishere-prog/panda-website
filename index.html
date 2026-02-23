@@ -1,85 +1,47 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>For My Baby 💖</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
-
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  scroll-behavior:smooth;
-}
-
+*{margin:0;padding:0;box-sizing:border-box;}
 body{
   font-family:'Poppins',sans-serif;
-  background: radial-gradient(ellipse at bottom, #0a0f2c 0%, #000 100%);
+  background:black;
   color:white;
   overflow-x:hidden;
 }
 
-/* 🌌 Stardust Background */
-.stars{
+canvas{
   position:fixed;
-  width:100%;
-  height:100%;
-  background:transparent;
-  overflow:hidden;
+  top:0;
+  left:0;
   z-index:-3;
 }
 
-.stars::after{
-  content:"";
-  position:absolute;
-  width:2px;
-  height:2px;
-  background:white;
-  box-shadow:
-  50px 200px white, 300px 400px white, 600px 100px white,
-  800px 600px white, 1200px 300px white, 200px 700px white,
-  900px 500px white, 1500px 200px white, 1700px 400px white;
-  animation:twinkle 4s infinite alternate;
-}
-
-@keyframes twinkle{
-  from{opacity:.2;}
-  to{opacity:1;}
-}
-
-/* 🌙 Moon */
-.moon{
+#moon{
   position:fixed;
   top:80px;
-  right:100px;
-  width:120px;
-  height:120px;
-  background:radial-gradient(circle at 30% 30%, #fff 40%, #ddd 70%, #aaa);
+  right:120px;
+  width:140px;
+  height:140px;
   border-radius:50%;
-  box-shadow:0 0 60px rgba(255,255,255,0.6);
+  background:radial-gradient(circle at 30% 30%, #fff 40%, #ddd 70%, #aaa);
+  box-shadow:0 0 80px rgba(255,255,255,0.6);
+  animation:moonPulse 6s infinite ease-in-out;
   z-index:-2;
 }
 
-/* 💖 Floating Hearts */
-.heart{
-  position:fixed;
-  bottom:-20px;
-  font-size:18px;
-  animation:floatUp 10s linear infinite;
-  opacity:.7;
-  z-index:-1;
+@keyframes moonPulse{
+  0%,100%{box-shadow:0 0 60px rgba(255,255,255,0.5);}
+  50%{box-shadow:0 0 100px rgba(255,255,255,0.9);}
 }
 
-@keyframes floatUp{
-  0%{transform:translateY(0);opacity:.8;}
-  100%{transform:translateY(-110vh);opacity:0;}
-}
-
-/* Loading */
-#loadingScreen{
+#loading{
   position:fixed;
   width:100%;
   height:100vh;
@@ -87,22 +49,21 @@ body{
   display:flex;
   align-items:center;
   justify-content:center;
+  font-size:1.4rem;
   z-index:9999;
-  font-size:1.5rem;
 }
 
-/* Password */
 #passwordSection{
   height:100vh;
   display:flex;
   flex-direction:column;
-  justify-content:center;
   align-items:center;
+  justify-content:center;
 }
 
 input{
   padding:12px 20px;
-  border-radius:25px;
+  border-radius:30px;
   border:none;
   margin-top:15px;
   text-align:center;
@@ -111,29 +72,22 @@ input{
 button{
   padding:10px 25px;
   margin-top:15px;
-  border:none;
   border-radius:25px;
+  border:none;
   background:hotpink;
   color:white;
   cursor:pointer;
-  transition:.3s;
+  transition:0.3s;
 }
+button:hover{transform:scale(1.1);}
 
-button:hover{
-  transform:scale(1.1);
-}
+#error{margin-top:10px;color:pink;}
 
-#error{
-  margin-top:10px;
-  color:pink;
-}
-
-/* Main */
-#mainContent{
+#main{
   display:none;
   padding:80px 20px;
   text-align:center;
-  animation:fadeIn 2s ease forwards;
+  animation:fadeIn 1s ease forwards;
 }
 
 @keyframes fadeIn{
@@ -143,146 +97,197 @@ button:hover{
 
 h1{
   font-size:3rem;
-  text-shadow:0 0 20px hotpink,0 0 40px deeppink;
-  margin-bottom:30px;
+  text-shadow:0 0 25px hotpink,0 0 50px deeppink;
+  margin-bottom:40px;
 }
 
-/* Glass Letter */
-.letterBox{
+.glass{
   background:rgba(255,255,255,0.08);
   backdrop-filter:blur(15px);
   padding:40px;
   border-radius:25px;
-  max-width:750px;
-  margin:30px auto;
-  box-shadow:0 0 40px rgba(255,255,255,0.2);
+  max-width:800px;
+  margin:0 auto;
+  box-shadow:0 0 50px rgba(255,255,255,0.2);
   line-height:1.8;
   font-size:1.1rem;
 }
 
-/* Plush Section */
-.plushSection{
-  margin-top:40px;
-}
-
-.plushSection img{
-  width:150px;
-  margin:15px;
-  border-radius:20px;
-  box-shadow:0 0 20px rgba(255,255,255,0.3);
-  transition:.3s;
-}
-
-.plushSection img:hover{
-  transform:scale(1.1);
-}
-
-/* Countdown */
-#countdown{
-  margin-top:20px;
+#playlistLabel{
+  margin-top:30px;
   font-size:1.2rem;
+  color:pink;
+}
+
+iframe{
+  margin-top:10px;
+  border-radius:20px;
+}
+
+#countdown{
+  margin-top:25px;
+  font-size:1.1rem;
+  opacity:0.8;
+}
+
+.plush{
+  position:absolute;
+  width:140px;
+  animation:float 6s infinite ease-in-out;
+  opacity:0.6;
+}
+
+#panda{left:10%;top:50%;}
+#teddy{right:10%;top:60%;}
+
+@keyframes float{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-20px);}
+}
+
+#secretBtn{
+  margin-top:40px;
+  background:purple;
+}
+
+#secretText{
+  display:none;
+  margin-top:30px;
+  font-size:1.5rem;
+  text-shadow:0 0 20px gold;
 }
 
 @media(max-width:768px){
   h1{font-size:2rem;}
+  .plush{display:none;}
 }
 </style>
 </head>
 
 <body>
 
-<div id="loadingScreen">Loading my heart...</div>
-<div class="stars"></div>
-<div class="moon"></div>
+<div id="loading">Loading my heart...</div>
+<canvas id="starfield"></canvas>
+<div id="moon"></div>
 
 <section id="passwordSection">
   <h1>Enter Our Anniversary 💖</h1>
-  <input type="password" id="passwordInput">
-  <button onclick="checkPassword()">Unlock</button>
-  <p id="error"></p>
+  <input type="password" id="pass">
+  <button onclick="unlock()">Unlock</button>
+  <div id="error"></div>
 </section>
 
-<section id="mainContent">
+<section id="main">
+  <h1>Hieee meraaaa babyyyyy</h1>
 
-  <h1 id="mainHeading"></h1>
+  <img id="panda" class="plush" src="https://i.imgur.com/4AiXzf8.jpeg">
+  <img id="teddy" class="plush" src="https://i.imgur.com/8Km9tLL.jpeg">
 
-  <div class="letterBox">
-    <!-- WRITE YOUR LETTER HERE -->
-    Write your cutesy letter here. Replace this text with your own words.
-  </div>
+  <div class="glass" id="letter"></div>
+
+  <div id="playlistLabel">Read in order 💌</div>
+
+  <iframe src="https://open.spotify.com/embed/playlist/3xcwB8jqLXvsboSSDBHQHD"
+    width="100%" height="380" allow="autoplay; clipboard-write; encrypted-media;">
+  </iframe>
 
   <div id="countdown"></div>
 
-  <div class="plushSection">
-    <img src="https://i.imgur.com/4AiXzf8.jpeg" alt="Panda Plush">
-    <img src="https://i.imgur.com/8Km9tLL.jpeg" alt="Teddy Bear Plush">
+  <button id="secretBtn" onclick="secret()">Click to open my heart 💖</button>
+  <div id="secretText">
+    Youuuu areeeee mineeee, for thiss lifetime and for every million you're born at.
   </div>
-
 </section>
 
-<audio id="bgMusic" loop>
+<audio id="piano" loop>
   <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_6f4b9a3a3a.mp3?filename=soft-piano-ambient-110397.mp3">
+</audio>
+
+<audio id="magic">
+  <source src="https://cdn.pixabay.com/download/audio/2022/08/04/audio_5bde1b0d1a.mp3?filename=magic-ambience-114118.mp3">
 </audio>
 
 <script>
 window.onload=function(){
-  setTimeout(()=>{
-    document.getElementById("loadingScreen").style.display="none";
-  },2000);
+  setTimeout(()=>document.getElementById("loading").style.display="none",2000);
 };
 
-const correctPassword="120125";
-
-function checkPassword(){
-  const input=document.getElementById("passwordInput").value.trim();
-  if(input===correctPassword){
+function unlock(){
+  if(document.getElementById("pass").value.trim()==="120125"){
     document.getElementById("passwordSection").style.display="none";
-    document.getElementById("mainContent").style.display="block";
-    document.getElementById("bgMusic").play();
-    typeHeading();
+    document.getElementById("main").style.display="block";
+    document.getElementById("piano").play();
+    animateLetter();
   }else{
     document.getElementById("error").innerHTML="How can you forget this date? 🥺";
   }
 }
 
-function typeHeading(){
-  const text="Hieeeeee meraaa babyyyyy 💖";
+/* Word by word letter */
+const text=`I ammmmmm sooooo sorrrry meraaa babyyyyy.
+Youuuu areeee myyyyy pyaaaruuuuu saaaaa bachaaaaaa my tedddyy bearuu.
+I lovee you more than the stars above us, more than the galaxies we look at, more than every celestial dust we've crossed paths with.
+Youuu live in my thoughtsss everyy single day every single moment.
+tummmm mereeee cutuuuu see baby hooo, my babyy, myy jaanuuu, myy lifee, myyy teddyyy bearrr, meraa all in all sb kuch and I am so so so luckyy to have you.
+I don't even love you. I've become youuu, I choose you.`;
+
+function animateLetter(){
+  const words=text.split(" ");
   let i=0;
-  const heading=document.getElementById("mainHeading");
-  function type(){
-    if(i<text.length){
-      heading.innerHTML+=text.charAt(i);
+  function addWord(){
+    if(i<words.length){
+      document.getElementById("letter").innerHTML+=words[i]+" ";
       i++;
-      setTimeout(type,80);
+      setTimeout(addWord,120);
     }
   }
-  type();
+  addWord();
 }
-
-/* Floating Hearts Generator */
-function createHeart(){
-  const heart=document.createElement("div");
-  heart.classList.add("heart");
-  heart.innerHTML="💖";
-  heart.style.left=Math.random()*100+"vw";
-  heart.style.fontSize=(Math.random()*20+15)+"px";
-  document.body.appendChild(heart);
-  setTimeout(()=>heart.remove(),10000);
-}
-setInterval(createHeart,800);
 
 /* Countdown */
-const targetDate=new Date("January 12, 2027 00:00:00").getTime();
+const target=new Date("January 12, 2027 00:00:00").getTime();
 setInterval(()=>{
   const now=new Date().getTime();
-  const distance=targetDate-now;
-  const days=Math.floor(distance/(1000*60*60*24));
-  const hours=Math.floor((distance%(1000*60*60*24))/(1000*60*60));
-  const minutes=Math.floor((distance%(1000*60*60))/(1000*60));
-  const seconds=Math.floor((distance%(1000*60))/1000);
+  const d=target-now;
+  const days=Math.floor(d/(1000*60*60*24));
+  const hours=Math.floor((d%(1000*60*60*24))/(1000*60*60));
+  const minutes=Math.floor((d%(1000*60*60))/(1000*60));
+  const seconds=Math.floor((d%(1000*60))/1000);
   document.getElementById("countdown").innerHTML=
   `Next Anniversary in: ${days}d ${hours}h ${minutes}m ${seconds}s`;
 },1000);
+
+/* Starfield */
+const canvas=document.getElementById("starfield");
+const ctx=canvas.getContext("2d");
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+let stars=[];
+for(let i=0;i<200;i++){
+  stars.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*2});
+}
+function drawStars(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle="white";
+  stars.forEach(s=>{
+    ctx.beginPath();
+    ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+    ctx.fill();
+    s.y+=0.1;
+    if(s.y>canvas.height)s.y=0;
+  });
+  requestAnimationFrame(drawStars);
+}
+drawStars();
+
+/* Secret fireworks */
+function secret(){
+  document.getElementById("secretText").style.display="block";
+  setTimeout(()=>{
+    document.getElementById("magic").play();
+    document.getElementById("piano").volume=0.3;
+  },1500);
+}
 </script>
 
 </body>
