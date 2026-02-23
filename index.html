@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,16 +12,73 @@
   margin:0;
   padding:0;
   box-sizing:border-box;
+  scroll-behavior:smooth;
 }
 
 body{
   font-family:'Poppins',sans-serif;
-  background: radial-gradient(ellipse at bottom, #0d1b2a 0%, #000000 100%);
+  background: radial-gradient(ellipse at bottom, #0a0f2c 0%, #000 100%);
   color:white;
   overflow-x:hidden;
 }
 
-/* ---------- LOADING SCREEN ---------- */
+/* 🌌 Stardust Background */
+.stars{
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:transparent;
+  overflow:hidden;
+  z-index:-3;
+}
+
+.stars::after{
+  content:"";
+  position:absolute;
+  width:2px;
+  height:2px;
+  background:white;
+  box-shadow:
+  50px 200px white, 300px 400px white, 600px 100px white,
+  800px 600px white, 1200px 300px white, 200px 700px white,
+  900px 500px white, 1500px 200px white, 1700px 400px white;
+  animation:twinkle 4s infinite alternate;
+}
+
+@keyframes twinkle{
+  from{opacity:.2;}
+  to{opacity:1;}
+}
+
+/* 🌙 Moon */
+.moon{
+  position:fixed;
+  top:80px;
+  right:100px;
+  width:120px;
+  height:120px;
+  background:radial-gradient(circle at 30% 30%, #fff 40%, #ddd 70%, #aaa);
+  border-radius:50%;
+  box-shadow:0 0 60px rgba(255,255,255,0.6);
+  z-index:-2;
+}
+
+/* 💖 Floating Hearts */
+.heart{
+  position:fixed;
+  bottom:-20px;
+  font-size:18px;
+  animation:floatUp 10s linear infinite;
+  opacity:.7;
+  z-index:-1;
+}
+
+@keyframes floatUp{
+  0%{transform:translateY(0);opacity:.8;}
+  100%{transform:translateY(-110vh);opacity:0;}
+}
+
+/* Loading */
 #loadingScreen{
   position:fixed;
   width:100%;
@@ -33,50 +89,15 @@ body{
   justify-content:center;
   z-index:9999;
   font-size:1.5rem;
-  letter-spacing:2px;
 }
 
-/* ---------- STARS ---------- */
-.stars{
-  position:fixed;
-  width:100%;
-  height:100%;
-  background:transparent;
-  overflow:hidden;
-  z-index:-1;
-}
-
-.stars::after{
-  content:"";
-  position:absolute;
-  width:2px;
-  height:2px;
-  background:white;
-  box-shadow:
-  100px 200px white,
-  300px 400px white,
-  500px 100px white,
-  700px 600px white,
-  900px 300px white,
-  200px 700px white,
-  600px 500px white,
-  800px 200px white;
-  animation:twinkle 3s infinite alternate;
-}
-
-@keyframes twinkle{
-  from{opacity:.3;}
-  to{opacity:1;}
-}
-
-/* ---------- PASSWORD SCREEN ---------- */
+/* Password */
 #passwordSection{
   height:100vh;
   display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:center;
-  text-align:center;
 }
 
 input{
@@ -85,7 +106,6 @@ input{
   border:none;
   margin-top:15px;
   text-align:center;
-  font-size:1rem;
 }
 
 button{
@@ -96,6 +116,11 @@ button{
   background:hotpink;
   color:white;
   cursor:pointer;
+  transition:.3s;
+}
+
+button:hover{
+  transform:scale(1.1);
 }
 
 #error{
@@ -103,11 +128,10 @@ button{
   color:pink;
 }
 
-/* ---------- MAIN CONTENT ---------- */
+/* Main */
 #mainContent{
   display:none;
-  min-height:100vh;
-  padding:50px 20px;
+  padding:80px 20px;
   text-align:center;
   animation:fadeIn 2s ease forwards;
 }
@@ -117,21 +141,40 @@ button{
   to{opacity:1;}
 }
 
-/* Glass effect */
-.glass{
-  background:rgba(255,255,255,0.08);
-  backdrop-filter:blur(15px);
-  padding:30px;
-  border-radius:20px;
-  max-width:800px;
-  margin:20px auto;
-  box-shadow:0 0 40px rgba(255,255,255,0.2);
-}
-
-/* Glow Heading */
 h1{
   font-size:3rem;
   text-shadow:0 0 20px hotpink,0 0 40px deeppink;
+  margin-bottom:30px;
+}
+
+/* Glass Letter */
+.letterBox{
+  background:rgba(255,255,255,0.08);
+  backdrop-filter:blur(15px);
+  padding:40px;
+  border-radius:25px;
+  max-width:750px;
+  margin:30px auto;
+  box-shadow:0 0 40px rgba(255,255,255,0.2);
+  line-height:1.8;
+  font-size:1.1rem;
+}
+
+/* Plush Section */
+.plushSection{
+  margin-top:40px;
+}
+
+.plushSection img{
+  width:150px;
+  margin:15px;
+  border-radius:20px;
+  box-shadow:0 0 20px rgba(255,255,255,0.3);
+  transition:.3s;
+}
+
+.plushSection img:hover{
+  transform:scale(1.1);
 }
 
 /* Countdown */
@@ -140,21 +183,6 @@ h1{
   font-size:1.2rem;
 }
 
-/* Hidden Button */
-#secretBtn{
-  margin-top:30px;
-  background:purple;
-}
-
-/* Fireworks Text */
-#secretMessage{
-  display:none;
-  font-size:1.5rem;
-  margin-top:20px;
-  text-shadow:0 0 15px gold;
-}
-
-/* Responsive */
 @media(max-width:768px){
   h1{font-size:2rem;}
 }
@@ -165,10 +193,11 @@ h1{
 
 <div id="loadingScreen">Loading my heart...</div>
 <div class="stars"></div>
+<div class="moon"></div>
 
 <section id="passwordSection">
   <h1>Enter Our Anniversary 💖</h1>
-  <input type="password" id="passwordInput" placeholder="Enter date">
+  <input type="password" id="passwordInput">
   <button onclick="checkPassword()">Unlock</button>
   <p id="error"></p>
 </section>
@@ -177,48 +206,31 @@ h1{
 
   <h1 id="mainHeading"></h1>
 
-  <div class="glass">
-    <p>
-      I am so sorry, mera baby, for hurting you. <br><br>
-      You're my pyara sa bacha. <br><br>
-      I love you more than stars, more than galaxies, more than dreams. <br><br>
-      I think about you every day, every time. <br><br>
-      You're my cutie sa baby. I'm so proud of you. <br><br>
-      I just love you. And I’m fighting for us.
-    </p>
+  <div class="letterBox">
+    <!-- WRITE YOUR LETTER HERE -->
+    Write your cutesy letter here. Replace this text with your own words.
   </div>
 
   <div id="countdown"></div>
 
-  <div class="glass">
-    <iframe style="border-radius:12px" 
-      src="https://open.spotify.com/embed/playlist/3xcwB8jqLXvsboSSDBHQHD"
-      width="100%" height="380"
-      allow="autoplay; clipboard-write; encrypted-media;">
-    </iframe>
-  </div>
-
-  <button id="secretBtn" onclick="revealSecret()">Click to open my heart 💖</button>
-  <div id="secretMessage">
-    I am yours for this lifetime and for another billion lifetimes. No refund. 💫
+  <div class="plushSection">
+    <img src="https://i.imgur.com/4AiXzf8.jpeg" alt="Panda Plush">
+    <img src="https://i.imgur.com/8Km9tLL.jpeg" alt="Teddy Bear Plush">
   </div>
 
 </section>
 
 <audio id="bgMusic" loop>
-  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_6f4b9a3a3a.mp3?filename=soft-piano-ambient-110397.mp3" type="audio/mpeg">
+  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_6f4b9a3a3a.mp3?filename=soft-piano-ambient-110397.mp3">
 </audio>
 
 <script>
-
-/* Fake loading */
 window.onload=function(){
   setTimeout(()=>{
     document.getElementById("loadingScreen").style.display="none";
   },2000);
 };
 
-/* Password */
 const correctPassword="120125";
 
 function checkPassword(){
@@ -233,43 +245,44 @@ function checkPassword(){
   }
 }
 
-/* Typing Heading */
 function typeHeading(){
   const text="Hieeeeee meraaa babyyyyy 💖";
   let i=0;
-  const speed=100;
   const heading=document.getElementById("mainHeading");
   function type(){
     if(i<text.length){
       heading.innerHTML+=text.charAt(i);
       i++;
-      setTimeout(type,speed);
+      setTimeout(type,80);
     }
   }
   type();
 }
 
+/* Floating Hearts Generator */
+function createHeart(){
+  const heart=document.createElement("div");
+  heart.classList.add("heart");
+  heart.innerHTML="💖";
+  heart.style.left=Math.random()*100+"vw";
+  heart.style.fontSize=(Math.random()*20+15)+"px";
+  document.body.appendChild(heart);
+  setTimeout(()=>heart.remove(),10000);
+}
+setInterval(createHeart,800);
+
 /* Countdown */
 const targetDate=new Date("January 12, 2027 00:00:00").getTime();
-
 setInterval(()=>{
   const now=new Date().getTime();
   const distance=targetDate-now;
-
   const days=Math.floor(distance/(1000*60*60*24));
   const hours=Math.floor((distance%(1000*60*60*24))/(1000*60*60));
   const minutes=Math.floor((distance%(1000*60*60))/(1000*60));
   const seconds=Math.floor((distance%(1000*60))/1000);
-
   document.getElementById("countdown").innerHTML=
   `Next Anniversary in: ${days}d ${hours}h ${minutes}m ${seconds}s`;
 },1000);
-
-/* Secret Button */
-function revealSecret(){
-  document.getElementById("secretMessage").style.display="block";
-}
-
 </script>
 
 </body>
